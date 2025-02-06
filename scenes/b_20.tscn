@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxy5uy5lq1q3a"]
+
+[ext_resource type="PackedScene" uid="uid://bqwtqdl722h5v" path="res://scenes/block.tscn" id="1_euriv"]
+
+[node name="b20" type="Node2D"]
+
+[node name="Block" parent="." instance=ExtResource("1_euriv")]
+position = Vector2(128, 0)
+
+[node name="Block2" parent="." instance=ExtResource("1_euriv")]
+
+[node name="Block3" parent="." instance=ExtResource("1_euriv")]
+position = Vector2(0, 128)
+
+[node name="Block4" parent="." instance=ExtResource("1_euriv")]
+position = Vector2(0, 256)

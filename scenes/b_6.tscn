@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bujxocwwnxkr6"]
+
+[ext_resource type="PackedScene" uid="uid://bqwtqdl722h5v" path="res://scenes/block.tscn" id="1_1lnyb"]
+
+[node name="b6" type="Node2D"]
+
+[node name="Block" parent="." instance=ExtResource("1_1lnyb")]
+
+[node name="Block2" parent="." instance=ExtResource("1_1lnyb")]
+position = Vector2(128, 0)
+
+[node name="Block3" parent="." instance=ExtResource("1_1lnyb")]
+position = Vector2(256, 0)
+
+[node name="Block4" parent="." instance=ExtResource("1_1lnyb")]
+position = Vector2(384, 0)
