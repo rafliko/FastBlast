@@ -3,7 +3,7 @@ extends Node2D
 var dragging = false
 var locked = false
 var old_parent
-var offset = Vector2(150,400)
+var offset = Vector2(150,500)
 var rng = RandomNumberGenerator.new()
 var scene
 
