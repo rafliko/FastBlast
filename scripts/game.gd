@@ -5,6 +5,7 @@ var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.getNewBlocks()
 	Globals.points = 0
 	for i in range(8):
 		Globals.grid.append([])

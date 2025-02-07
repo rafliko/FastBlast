@@ -5,3 +5,12 @@
 [node name="b1" type="Node2D"]
 
 [node name="Block" parent="." instance=ExtResource("1_8t1un")]
+
+[node name="Block2" parent="." instance=ExtResource("1_8t1un")]
+position = Vector2(128, 0)
+
+[node name="Block3" parent="." instance=ExtResource("1_8t1un")]
+position = Vector2(256, 0)
+
+[node name="Block4" parent="." instance=ExtResource("1_8t1un")]
+position = Vector2(128, 128)

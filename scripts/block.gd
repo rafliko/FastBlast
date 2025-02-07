@@ -55,12 +55,7 @@ func checkAndLock():
 		
 	Globals.points += 10
 	checkForLines()
-	
-	var p1 = get_node("/root/Game/p1")
-	var p2 = get_node("/root/Game/p2")
-	var p3 = get_node("/root/Game/p3")
-	if p1.get_child_count() == 0 and p2.get_child_count() == 0 and p3.get_child_count() == 0:
-		getNewBlocks()
+	Globals.getNewBlocks()
 
 
 func randomizeColor():
@@ -72,14 +67,15 @@ func randomizeColor():
 		
 
 func checkForLines():
+	var tmp = Globals.grid.duplicate(true)
 	var countv
 	var counth
 	for i in range(8):
 		countv = 0
 		counth = 0
 		for j in range(8):
-			if(Globals.grid[i][j]==true): countv+=1
-			if(Globals.grid[j][i]==true): counth+=1
+			if(tmp[i][j]==true): countv+=1
+			if(tmp[j][i]==true): counth+=1
 		if(countv==8):
 			for j in range(8):
 				Globals.grid[i][j] = false
@@ -94,16 +90,5 @@ func checkIfAlive():
 	var groupPosition = get_node("..").position
 	var x = round((position.x+groupPosition.x)/128)
 	var y = round((position.y+groupPosition.y)/128)
-	if(Globals.grid[x][y]==false): queue_free()
-	
-	
-func getNewBlocks():
-	var p1 = get_node("/root/Game/p1")
-	var p2 = get_node("/root/Game/p2")
-	var p3 = get_node("/root/Game/p3")
-	scene = load("res://scenes/b_"+str(rng.randi_range(1,20))+".tscn")
-	p1.add_child(scene.instantiate())
-	scene = load("res://scenes/b_"+str(rng.randi_range(1,20))+".tscn")
-	p2.add_child(scene.instantiate())
-	scene = load("res://scenes/b_"+str(rng.randi_range(1,20))+".tscn")
-	p3.add_child(scene.instantiate())
+	if(Globals.grid[x][y]==false): 
+		queue_free()

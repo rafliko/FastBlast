@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsshq2vcm4dmv"]
+[gd_scene load_steps=3 format=3 uid="uid://dsshq2vcm4dmv"]
 
 [ext_resource type="Texture2D" uid="uid://dbf4lo50rn8ho" path="res://textures/board.png" id="1_rgbnm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_x8rcg"]
-[ext_resource type="PackedScene" uid="uid://c0tyygc3wxwh4" path="res://scenes/b_14.tscn" id="2_wj2th"]
-[ext_resource type="PackedScene" uid="uid://bpbcnpwfagkxo" path="res://scenes/b_13.tscn" id="3_4cjg3"]
-[ext_resource type="PackedScene" uid="uid://dh6pdd5es3vm4" path="res://scenes/b_10.tscn" id="5_fcy33"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_x8rcg")
@@ -28,19 +25,13 @@ centered = false
 position = Vector2(110, 950)
 scale = Vector2(0.3, 0.3)
 
-[node name="b14" parent="p1" instance=ExtResource("2_wj2th")]
-
 [node name="p2" type="Node2D" parent="."]
 position = Vector2(310, 950)
 scale = Vector2(0.3, 0.3)
 
-[node name="b13" parent="p2" instance=ExtResource("3_4cjg3")]
-
 [node name="p3" type="Node2D" parent="."]
 position = Vector2(510, 950)
 scale = Vector2(0.3, 0.3)
-
-[node name="b10" parent="p3" instance=ExtResource("5_fcy33")]
 
 [node name="Retry" type="Button" parent="."]
 offset_left = 514.0

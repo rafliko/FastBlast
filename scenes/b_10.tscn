@@ -13,7 +13,7 @@ position = Vector2(128, 0)
 position = Vector2(256, 0)
 
 [node name="Block4" parent="." instance=ExtResource("1_wanur")]
-position = Vector2(256, 128)
+position = Vector2(0, 128)
 
 [node name="Block5" parent="." instance=ExtResource("1_wanur")]
-position = Vector2(256, 256)
+position = Vector2(0, 256)
