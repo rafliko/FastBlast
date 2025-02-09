@@ -5,7 +5,8 @@ var locked = false
 var old_parent
 var offset = Vector2(150,500)
 var rng = RandomNumberGenerator.new()
-var scene
+var gridX = 0
+var gridY = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +18,11 @@ func _process(delta):
 	if dragging:
 		get_node("..").position = (get_global_mouse_position()-offset)*1.6
 	if locked:
-		checkIfAlive()
+		if !checkIfAlive():
+			scale -= Vector2(1, 1) * delta * 3
+			position += Vector2(1, 1) * delta * 200
+			if scale <= Vector2(0.1, 0.1):
+				queue_free()
 
 
 func _on_button_button_down():
@@ -46,9 +51,9 @@ func validateAndLock():
 	var groupPosition = get_node("..").position
 	if Globals.validateOnPosition(get_node(".."), groupPosition):		
 		for c in get_node("..").get_children():
-			var x = round((c.position.x+groupPosition.x)/128)
-			var y = round((c.position.y+groupPosition.y)/128)
-			Globals.grid[x][y] = true
+			c.gridX = round((c.position.x+groupPosition.x)/128)
+			c.gridY = round((c.position.y+groupPosition.y)/128)
+			Globals.grid[c.gridX][c.gridY] = true
 			c.locked = true
 			
 		Globals.points += 10
@@ -77,8 +82,4 @@ func checkForLines():
 
 
 func checkIfAlive():
-	var groupPosition = get_node("..").position
-	var x = round((position.x+groupPosition.x)/128)
-	var y = round((position.y+groupPosition.y)/128)
-	if(Globals.grid[x][y]==false): 
-		queue_free()	
+	return Globals.grid[gridX][gridY]

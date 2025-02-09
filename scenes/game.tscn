@@ -41,6 +41,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Retry" type="Button" parent="GameOver"]
+layout_mode = 0
 offset_left = 514.0
 offset_top = 1144.0
 offset_right = 690.0
@@ -49,6 +50,7 @@ theme_override_font_sizes/font_size = 50
 text = "Retry"
 
 [node name="lbGameOver" type="Label" parent="GameOver"]
+layout_mode = 0
 offset_left = 89.0
 offset_top = 1147.0
 offset_right = 432.0

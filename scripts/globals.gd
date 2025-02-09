@@ -18,7 +18,7 @@ func getNewBlocks():
 	
 	if p1.get_child_count() == 0 and p2.get_child_count() == 0 and p3.get_child_count() == 0:
 		group = randomizeGroup().instantiate()
-		while !validateAllPositions(group) and iter < 10000:
+		while !validateAllPositions(group) and iter < 1000:
 			group.queue_free()
 			group = randomizeGroup().instantiate()
 			iter+=1
@@ -28,7 +28,7 @@ func getNewBlocks():
 		iter = 0
 		
 		group = randomizeGroup().instantiate()
-		while !validateAllPositions(group) and iter < 10000:
+		while !validateAllPositions(group) and iter < 1000:
 			group.queue_free()
 			group = randomizeGroup().instantiate()
 			iter+=1
@@ -38,7 +38,7 @@ func getNewBlocks():
 		iter = 0
 		
 		group = randomizeGroup().instantiate()
-		while !validateAllPositions(group) and iter < 10000:
+		while !validateAllPositions(group) and iter < 1000:
 			group.queue_free()
 			group = randomizeGroup().instantiate()
 			iter+=1

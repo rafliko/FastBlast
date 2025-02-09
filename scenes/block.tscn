@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqwtqdl722h5v"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_20p7l"]
-[ext_resource type="Texture2D" uid="uid://clvuplcitpe40" path="res://textures/block.png" id="1_g1el5"]
+[ext_resource type="Texture2D" uid="uid://cqd2m6wgik31h" path="res://textures/blocks base.png" id="2_sc74w"]
 
 [node name="Block" type="Node2D"]
 script = ExtResource("1_20p7l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_g1el5")
+texture = ExtResource("2_sc74w")
 centered = false
 
 [node name="Button" type="Button" parent="."]
