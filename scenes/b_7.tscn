@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bqwtqdl722h5v" path="res://scenes/block.tscn" id="1_fe01t"]
 
 [node name="b7" type="Node2D"]
+position = Vector2(128, 0)
 
 [node name="Block" parent="." instance=ExtResource("1_fe01t")]
 

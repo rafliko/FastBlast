@@ -9,7 +9,7 @@ var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomizeColor()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,41 +30,31 @@ func _on_button_button_down():
 func _unhandled_input(event):
 	if event is InputEventMouseButton and dragging:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-			checkAndLock()
+			validateAndLock()
 			if !locked:
 				get_node("..").reparent(old_parent,false)
 				get_node("..").position = Vector2(0,0)
 			dragging = false
+			if Globals.checkGameOver():
+				print("GAME OVER")
+				get_node("/root/Game/GameOver").visible = true
 
 
-func checkAndLock():
+func validateAndLock():
 	get_node("..").position.x = round(get_node("..").position.x/128)*128
 	get_node("..").position.y = round(get_node("..").position.y/128)*128
 	var groupPosition = get_node("..").position
-	for c in get_node("..").get_children():
-		var x = round((c.position.x+groupPosition.x)/128)
-		var y = round((c.position.y+groupPosition.y)/128)
-		print(str(x)+" "+str(y))
-		if x > 7 or y > 7 or x < 0 or y < 0 or Globals.grid[x][y] != false:
-			return
-	for c in get_node("..").get_children():
-		var x = round((c.position.x+groupPosition.x)/128)
-		var y = round((c.position.y+groupPosition.y)/128)
-		Globals.grid[x][y] = true
-		c.locked = true
-		
-	Globals.points += 10
-	checkForLines()
-	Globals.getNewBlocks()
+	if Globals.validateOnPosition(get_node(".."), groupPosition):		
+		for c in get_node("..").get_children():
+			var x = round((c.position.x+groupPosition.x)/128)
+			var y = round((c.position.y+groupPosition.y)/128)
+			Globals.grid[x][y] = true
+			c.locked = true
+			
+		Globals.points += 10
+		checkForLines()
+		Globals.getNewBlocks()
 
-
-func randomizeColor():
-	var r = rng.randf_range(0,1)
-	var g = rng.randf_range(0,1)
-	var b = rng.randf_range(0,1)
-	for c in get_node("..").get_children():
-		c.get_child(0).modulate = Color(r,g,b)
-		
 
 func checkForLines():
 	var tmp = Globals.grid.duplicate(true)
@@ -84,11 +74,11 @@ func checkForLines():
 			for j in range(8):
 				Globals.grid[j][i] = false
 			Globals.points += 100
-				
+
 
 func checkIfAlive():
 	var groupPosition = get_node("..").position
 	var x = round((position.x+groupPosition.x)/128)
 	var y = round((position.y+groupPosition.y)/128)
 	if(Globals.grid[x][y]==false): 
-		queue_free()
+		queue_free()	

@@ -22,18 +22,25 @@ texture = ExtResource("1_rgbnm")
 centered = false
 
 [node name="p1" type="Node2D" parent="."]
-position = Vector2(110, 950)
+position = Vector2(110, 900)
 scale = Vector2(0.3, 0.3)
 
 [node name="p2" type="Node2D" parent="."]
-position = Vector2(310, 950)
+position = Vector2(310, 900)
 scale = Vector2(0.3, 0.3)
 
 [node name="p3" type="Node2D" parent="."]
-position = Vector2(510, 950)
+position = Vector2(510, 900)
 scale = Vector2(0.3, 0.3)
 
-[node name="Retry" type="Button" parent="."]
+[node name="GameOver" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Retry" type="Button" parent="GameOver"]
 offset_left = 514.0
 offset_top = 1144.0
 offset_right = 690.0
@@ -41,4 +48,12 @@ offset_bottom = 1245.0
 theme_override_font_sizes/font_size = 50
 text = "Retry"
 
-[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[node name="lbGameOver" type="Label" parent="GameOver"]
+offset_left = 89.0
+offset_top = 1147.0
+offset_right = 432.0
+offset_bottom = 1230.0
+theme_override_font_sizes/font_size = 60
+text = "GAME OVER"
+
+[connection signal="pressed" from="GameOver/Retry" to="." method="_on_retry_pressed"]

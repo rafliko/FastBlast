@@ -5,12 +5,12 @@ var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.getNewBlocks()
 	Globals.points = 0
 	for i in range(8):
 		Globals.grid.append([])
 		for j in range(8):
 			Globals.grid[i].append(false)
+	Globals.getNewBlocks()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
