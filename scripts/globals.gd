@@ -49,9 +49,9 @@ func getNewBlocks():
 
 
 func randomizeColor(group):
-	var color = colors[rng.randi_range(0,colors.size()-1)]
+	var n = rng.randi_range(1,7)
 	for c in group.get_children():
-		c.get_child(0).modulate = color
+		c.get_child(0).texture = load("res://textures/blocks"+str(n)+".png")
 
 
 func randomizeGroup():
