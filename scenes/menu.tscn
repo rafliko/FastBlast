@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr58wrr06y2y5"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_t8012"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t8012")
+
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = 65.0
+offset_top = 125.0
+offset_right = 686.0
+offset_bottom = 305.0
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[rainbow freq=0.05][wave amp=50]FastBlast![/wave]"
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 500.0
+offset_right = 600.0
+offset_bottom = 670.0
+theme_override_font_sizes/font_size = 100
+text = "PLAY"
+
+[node name="ScoresButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 789.0
+offset_right = 600.0
+offset_bottom = 959.0
+theme_override_font_sizes/font_size = 100
+text = "SCORES"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ScoresButton" to="." method="_on_scores_button_pressed"]

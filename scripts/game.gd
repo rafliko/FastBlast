@@ -5,6 +5,7 @@ var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.grid.clear()
 	Globals.points = 0
 	for i in range(8):
 		Globals.grid.append([])
@@ -19,5 +20,8 @@ func _process(delta):
 
 
 func _on_retry_pressed():
-	Globals.grid.clear()
 	get_tree().reload_current_scene()
+
+
+func _on_menu_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

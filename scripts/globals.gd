@@ -2,8 +2,9 @@ extends Node
 
 var grid = []
 var points = 0
+var scores = [0, 0, 0, 0, 0]
 var rng = RandomNumberGenerator.new()
-var colors = [Color(0.83,0.4,0.84), Color(0.92,0.72,0.22), Color(0.23,0.7,0.88), Color(0.8,0.22,0.22), Color(0.25,0.71,0.25)]
+var savePath = "user://scores.save"
 
 var Easy = [4,5,6,7,12,13,14,15]
 var Medium = [8,9,10,11,18,19,20,21,24,25,26,27,28,29,30,31]
@@ -57,10 +58,10 @@ func randomizeColor(group):
 func randomizeGroup():
 	var n = 0
 	var r = rng.randi_range(1, 100)
-	if r <= 50:
+	if r <= 80:
 		n = rng.randi_range(0,Easy.size()-1)
 		return load("res://scenes/b_"+str(Easy[n])+".tscn")
-	elif r <= 80:
+	elif r <= 90:
 		n = rng.randi_range(0,Medium.size()-1)
 		return load("res://scenes/b_"+str(Medium[n])+".tscn")
 	else:
@@ -72,7 +73,6 @@ func validateOnPosition(group, pos):
 	for c in group.get_children():
 		var x = round((c.position.x+pos.x)/128)
 		var y = round((c.position.y+pos.y)/128)
-		print(str(x)+" "+str(y))
 		if x > 7 or y > 7 or x < 0 or y < 0 or Globals.grid[x][y] != false:
 			return false
 	return true
@@ -99,7 +99,28 @@ func checkGameOver():
 	if p3.get_child_count() == 0 || !validateAllPositions(p3.get_child(0)):
 		count+=1
 	
-	print("COUNT: "+str(count))
-	
 	if count == 3: return true
 	else: return false
+
+
+func loadScores():
+	if FileAccess.file_exists(savePath):
+		var file = FileAccess.open(savePath,FileAccess.READ)
+		scores = file.get_var()
+
+
+func saveScore():
+	var min = scores[0]
+	
+	for s in scores:
+		if s < min: min = s
+		
+	if points > min:
+		for i in range(scores.size()):
+			if scores[i] == min: 
+				scores[i] = points
+				break
+	
+	var file = FileAccess.open(savePath, FileAccess.WRITE)
+	file.store_var(scores)
+	file.close()

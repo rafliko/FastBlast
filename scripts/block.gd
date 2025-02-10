@@ -3,20 +3,21 @@ extends Node2D
 var dragging = false
 var locked = false
 var old_parent
-var offset = Vector2(150,500)
+var offset = Vector2(200,700)
 var rng = RandomNumberGenerator.new()
 var gridX = 0
 var gridY = 0
+var basePos = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	basePos = get_node("..").position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if dragging:
-		get_node("..").position = (get_global_mouse_position()-offset)*1.6
+		get_node("..").position = (get_global_mouse_position()-offset)*2
 	if locked:
 		if !checkIfAlive():
 			scale -= Vector2(1, 1) * delta * 3
@@ -29,6 +30,7 @@ func _on_button_button_down():
 	if !locked:
 		old_parent = get_node("../..")
 		get_node("..").reparent(get_node("../../../Board"),false)
+		get_node("..").z_index = 1
 		dragging = true
 
 
@@ -38,11 +40,13 @@ func _unhandled_input(event):
 			validateAndLock()
 			if !locked:
 				get_node("..").reparent(old_parent,false)
-				get_node("..").position = Vector2(0,0)
+				get_node("..").position = basePos
+			get_node("..").z_index = 0
 			dragging = false
 			if Globals.checkGameOver():
 				print("GAME OVER")
 				get_node("/root/Game/GameOver").visible = true
+				Globals.saveScore()
 
 
 func validateAndLock():
