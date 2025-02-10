@@ -43,7 +43,7 @@ func _unhandled_input(event):
 				get_node("..").position = basePos
 			get_node("..").z_index = 0
 			dragging = false
-			if Globals.checkGameOver():
+			if Globals.checkGameOver() and !get_node("/root/Game/GameOver").visible:
 				print("GAME OVER")
 				get_node("/root/Game/GameOver").visible = true
 				Globals.saveScore()
