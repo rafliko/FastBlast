@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_t8012")
 
 [node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 65.0
 offset_top = 125.0
 offset_right = 686.0
@@ -22,21 +23,31 @@ text = "[rainbow freq=0.05][wave amp=50]FastBlast![/wave]"
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 500.0
-offset_right = 600.0
-offset_bottom = 670.0
+offset_left = 143.0
+offset_top = 440.0
+offset_right = 593.0
+offset_bottom = 610.0
 theme_override_font_sizes/font_size = 100
 text = "PLAY"
 
 [node name="ScoresButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 789.0
-offset_right = 600.0
-offset_bottom = 959.0
+offset_left = 143.0
+offset_top = 677.0
+offset_right = 593.0
+offset_bottom = 847.0
 theme_override_font_sizes/font_size = 100
 text = "SCORES"
 
+[node name="CreditsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 928.0
+offset_right = 593.0
+offset_bottom = 1098.0
+theme_override_font_sizes/font_size = 100
+text = "CREDITS"
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ScoresButton" to="." method="_on_scores_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]

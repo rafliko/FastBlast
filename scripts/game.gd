@@ -1,5 +1,6 @@
 extends Node2D
 
+var music_bus = AudioServer.get_bus_index("Master")
 var rng = RandomNumberGenerator.new()
 var scene
 
@@ -12,6 +13,8 @@ func _ready():
 		for j in range(8):
 			Globals.grid[i].append(false)
 	Globals.getNewBlocks()
+	if AudioServer.is_bus_mute(music_bus): $MuteButton.text = " 🔇"
+	else: $MuteButton.text = " 🔈"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,3 +28,9 @@ func _on_retry_pressed():
 
 func _on_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+
+func _on_mute_button_pressed():
+	AudioServer.set_bus_mute(music_bus, not AudioServer.is_bus_mute(music_bus))
+	if AudioServer.is_bus_mute(music_bus): $MuteButton.text = " 🔇"
+	else: $MuteButton.text = " 🔈"

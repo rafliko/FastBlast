@@ -1,16 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsshq2vcm4dmv"]
+[gd_scene load_steps=7 format=3 uid="uid://dsshq2vcm4dmv"]
 
 [ext_resource type="Texture2D" uid="uid://dbf4lo50rn8ho" path="res://textures/board.png" id="1_rgbnm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_x8rcg"]
+[ext_resource type="AudioStream" uid="uid://c75147gnxh716" path="res://sfx/snap.wav" id="3_cakwf"]
+[ext_resource type="AudioStream" uid="uid://uk6x4i5xf2ii" path="res://sfx/jingle1.wav" id="4_5sr4j"]
+[ext_resource type="AudioStream" uid="uid://gqotff1ip0xu" path="res://sfx/fail2.wav" id="5_fbaka"]
+[ext_resource type="AudioStream" uid="uid://uapubgqqnq6g" path="res://sfx/fail1.wav" id="5_i7k0i"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_x8rcg")
 
 [node name="Points" type="Label" parent="."]
 offset_left = 114.0
-offset_top = 112.0
+offset_top = 133.0
 offset_right = 621.0
-offset_bottom = 249.0
+offset_bottom = 270.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 horizontal_alignment = 1
@@ -57,6 +61,13 @@ offset_bottom = 104.0
 theme_override_font_sizes/font_size = 50
 text = "MENU"
 
+[node name="MuteButton" type="Button" parent="."]
+offset_left = 301.0
+offset_right = 429.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 50
+text = " 🔈"
+
 [node name="RetryButton" type="Button" parent="."]
 offset_left = 544.0
 offset_right = 720.0
@@ -64,5 +75,19 @@ offset_bottom = 101.0
 theme_override_font_sizes/font_size = 50
 text = "RETRY"
 
+[node name="Snap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cakwf")
+
+[node name="Jingle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5sr4j")
+
+[node name="Fail" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fbaka")
+volume_db = 15.0
+
+[node name="Combo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_i7k0i")
+
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="MuteButton" to="." method="_on_mute_button_pressed"]
 [connection signal="pressed" from="RetryButton" to="." method="_on_retry_pressed"]

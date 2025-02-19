@@ -20,10 +20,12 @@ func _process(delta):
 		get_node("..").position = (get_global_mouse_position()-offset)*2
 	if locked:
 		if !checkIfAlive():
-			scale -= Vector2(1, 1) * delta * 3
-			position += Vector2(1, 1) * delta * 200
-			if scale <= Vector2(0.1, 0.1):
-				queue_free()
+			queue_free()
+			#old animation:
+			#scale -= Vector2(1, 1) * delta * 3
+			#position += Vector2(1, 1) * delta * 200
+			#if scale <= Vector2(0.1, 0.1):
+			#	queue_free()
 
 
 func _on_button_button_down():
@@ -46,6 +48,7 @@ func _unhandled_input(event):
 			if Globals.checkGameOver() and !get_node("/root/Game/GameOver").visible:
 				print("GAME OVER")
 				get_node("/root/Game/GameOver").visible = true
+				get_node("/root/Game/Fail").play()
 				Globals.saveScore()
 
 
@@ -63,12 +66,15 @@ func validateAndLock():
 		Globals.points += 10
 		checkForLines()
 		Globals.getNewBlocks()
+		get_node("/root/Game/Snap").play()
 
 
 func checkForLines():
 	var tmp = Globals.grid.duplicate(true)
 	var countv
 	var counth
+	var comboUp = false
+	
 	for i in range(8):
 		countv = 0
 		counth = 0
@@ -78,12 +84,40 @@ func checkForLines():
 		if(countv==8):
 			for j in range(8):
 				Globals.grid[i][j] = false
-			Globals.points += 100
+			comboUp = true
+			Globals.combo += 1
+			Globals.points += 100 * Globals.combo
+			Globals.spawnClearAnim(i*128, 0, 0)
+			get_node("/root/Game/Jingle").play()
+			comboPlay()
 		if(counth==8):
 			for j in range(8):
 				Globals.grid[j][i] = false
-			Globals.points += 100
+			comboUp = true
+			Globals.combo += 1
+			Globals.points += 100 * Globals.combo
+			Globals.spawnClearAnim(0, (i+1)*128, -PI/2)
+			get_node("/root/Game/Jingle").play()
+			comboPlay()
+			
+	if !comboUp: Globals.combo = 0
 
 
 func checkIfAlive():
 	return Globals.grid[gridX][gridY]
+	
+
+func comboPlay():
+	if Globals.combo == 2:
+		get_node("/root/Game/Combo").stream = load("res://sfx/good.wav")
+	elif Globals.combo == 3:
+		get_node("/root/Game/Combo").stream = load("res://sfx/great.wav")
+	elif Globals.combo == 4:
+		get_node("/root/Game/Combo").stream = load("res://sfx/amazing.wav")
+	elif Globals.combo == 5:
+		get_node("/root/Game/Combo").stream = load("res://sfx/excellent.wav")
+	elif Globals.combo >= 6:
+		get_node("/root/Game/Combo").stream = load("res://sfx/unbelievable.wav")
+	else: return
+	
+	get_node("/root/Game/Combo").play()

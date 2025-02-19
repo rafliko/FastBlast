@@ -3,7 +3,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.loadScores()
 	Globals.scores.sort_custom(func(a,b): return a > b)
 	for i in range(Globals.scores.size()):
 		$ScoreList.add_item(str(i+1)+". "+str(Globals.scores[i]))

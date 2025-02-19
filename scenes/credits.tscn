@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw7bs83nf0vrv"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_ojifb"]
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ojifb")
+
+[node name="MenuButton" type="Button" parent="."]
+offset_right = 180.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 50
+text = "MENU"
+
+[node name="TextBox" type="Button" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 442.0
+offset_right = 711.0
+offset_bottom = 886.0
+theme_override_font_sizes/font_size = 40
+text = "Design: Rafał Palka
+Programming: Rafał Palka
+Sprites: Dawid Cebrat / Rafał Palka
+Animations: Dawid Cebrat
+Voice lines: Dawid Cebrat
+SFX: freesound.org"
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

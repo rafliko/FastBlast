@@ -12,7 +12,7 @@ config_version=5
 
 config/name="FastBlast"
 run/main_scene="res://scenes/menu.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=100
 boot_splash/bg_color=Color(0.239216, 0.243137, 0.6, 1)
 boot_splash/image="res://textures/icon.png"

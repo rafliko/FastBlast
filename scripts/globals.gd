@@ -1,14 +1,17 @@
 extends Node
 
 var grid = []
+var combo = 0
 var points = 0
 var scores = [0, 0, 0, 0, 0]
 var rng = RandomNumberGenerator.new()
 var savePath = "user://scores.save"
+var clearAnimScene = preload("res://scenes/clear_animation.tscn")
 
 var Easy = [4,5,6,7,12,13,14,15]
 var Medium = [8,9,10,11,18,19,20,21,24,25,26,27,28,29,30,31]
 var Hard = [0,1,2,3,16,17,22,23]
+
 
 func getNewBlocks():
 	var p1 = get_node("/root/Game/p1")
@@ -124,3 +127,10 @@ func saveScore():
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
 	file.store_var(scores)
 	file.close()
+	
+
+func spawnClearAnim(x, y, r):
+	var instance = clearAnimScene.instantiate()
+	instance.position = Vector2(x,y)
+	instance.rotation = r
+	get_node("/root/Game/Board").add_child(instance)
