@@ -89,6 +89,50 @@ func validateAllPositions(group):
 	return false
 
 
+func checkForLines():
+	var tmp = grid.duplicate(true)
+	var countv
+	var counth
+	var comboUp = false
+	
+	for i in range(8):
+		countv = 0
+		counth = 0
+		for j in range(8):
+			if(tmp[i][j]==true): countv+=1
+			if(tmp[j][i]==true): counth+=1
+		if(countv==8):
+			for j in range(8):
+				grid[i][j] = false
+			comboUp = true
+			combo += 1
+			points += 100 * combo
+			spawnClearAnim(i*128, 0, 0)
+			get_node("/root/Game/Jingle").pitch_scale = (combo-1)*0.1+1
+			get_node("/root/Game/Jingle").play()
+		if(counth==8):
+			for j in range(8):
+				grid[j][i] = false
+			comboUp = true
+			combo += 1
+			points += 100 * combo
+			spawnClearAnim(0, (i+1)*128, -PI/2)
+			get_node("/root/Game/Jingle").pitch_scale = (combo-1)*0.1+1
+			get_node("/root/Game/Jingle").play()
+			
+	if !comboUp: combo = 0
+	
+	if combo > 1:
+		get_node("/root/Game/lbCombo").text = "[rainbow][wave amp=100 freq=10]COMBO X"+str(combo)
+		get_node("/root/Game/lbCombo").opacity = 1
+		comboPlay()
+	
+	#delete empty groups
+	for c in get_node("/root/Game/Board").get_children():
+		if c.get_child_count() == 0:
+			c.queue_free()
+
+
 func checkGameOver():
 	var p1 = get_node("/root/Game/p1")
 	var p2 = get_node("/root/Game/p2")
@@ -134,3 +178,19 @@ func spawnClearAnim(x, y, r):
 	instance.position = Vector2(x,y)
 	instance.rotation = r
 	get_node("/root/Game/Board").add_child(instance)
+	
+
+func comboPlay():
+	if combo == 2:
+		get_node("/root/Game/Combo").stream = load("res://sfx/good.wav")
+	elif combo == 3:
+		get_node("/root/Game/Combo").stream = load("res://sfx/great.wav")
+	elif combo == 4:
+		get_node("/root/Game/Combo").stream = load("res://sfx/amazing.wav")
+	elif combo == 5:
+		get_node("/root/Game/Combo").stream = load("res://sfx/excellent.wav")
+	elif combo >= 6:
+		get_node("/root/Game/Combo").stream = load("res://sfx/unbelievable.wav")
+	else: return
+	
+	get_node("/root/Game/Combo").play()
