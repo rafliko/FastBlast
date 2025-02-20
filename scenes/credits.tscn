@@ -8,6 +8,7 @@ anchors_preset = 0
 script = ExtResource("1_ojifb")
 
 [node name="MenuButton" type="Button" parent="."]
+layout_mode = 0
 offset_right = 180.0
 offset_bottom = 104.0
 theme_override_font_sizes/font_size = 50

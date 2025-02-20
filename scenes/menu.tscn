@@ -19,7 +19,7 @@ offset_right = 686.0
 offset_bottom = 305.0
 theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
-text = "[rainbow freq=0.05][wave amp=50]FastBlast![/wave]"
+text = "[rainbow freq=0.05][wave amp=50]FastBlast![/wave][/rainbow]"
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0

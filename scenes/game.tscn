@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dbf4lo50rn8ho" path="res://textures/board.png" id="1_rgbnm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_x8rcg"]
 [ext_resource type="AudioStream" uid="uid://c75147gnxh716" path="res://sfx/snap.wav" id="3_cakwf"]
+[ext_resource type="Script" path="res://scripts/lb_combo.gd" id="3_o3vgm"]
 [ext_resource type="AudioStream" uid="uid://uk6x4i5xf2ii" path="res://sfx/jingle1.wav" id="4_5sr4j"]
 [ext_resource type="AudioStream" uid="uid://gqotff1ip0xu" path="res://sfx/fail2.wav" id="5_fbaka"]
-[ext_resource type="AudioStream" uid="uid://uapubgqqnq6g" path="res://sfx/fail1.wav" id="5_i7k0i"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_x8rcg")
@@ -45,15 +45,28 @@ offset_top = 50.0
 offset_right = 40.0
 offset_bottom = 90.0
 
-[node name="lbGameOver" type="Label" parent="GameOver"]
+[node name="lbGameOver" type="RichTextLabel" parent="GameOver"]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 633.0
-offset_right = 711.0
-offset_bottom = 784.0
-rotation = -0.648772
-theme_override_font_sizes/font_size = 110
-text = "GAME OVER"
+offset_left = 82.0
+offset_top = 481.0
+offset_right = 723.0
+offset_bottom = 635.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[pulse][shake]GAME OVER"
+
+[node name="lbCombo" type="RichTextLabel" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 107.0
+offset_top = 530.0
+offset_right = 741.0
+offset_bottom = 675.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[rainbow][wave amp=100 freq=10]COMBO X2"
+script = ExtResource("3_o3vgm")
 
 [node name="MenuButton" type="Button" parent="."]
 offset_right = 180.0
@@ -80,13 +93,14 @@ stream = ExtResource("3_cakwf")
 
 [node name="Jingle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_5sr4j")
+volume_db = 10.0
 
 [node name="Fail" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fbaka")
-volume_db = 15.0
+volume_db = 20.0
 
 [node name="Combo" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_i7k0i")
+volume_db = 10.0
 
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="MuteButton" to="." method="_on_mute_button_pressed"]

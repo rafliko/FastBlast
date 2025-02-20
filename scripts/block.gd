@@ -88,8 +88,8 @@ func checkForLines():
 			Globals.combo += 1
 			Globals.points += 100 * Globals.combo
 			Globals.spawnClearAnim(i*128, 0, 0)
+			get_node("/root/Game/Jingle").pitch_scale = (Globals.combo-1)*0.1+1
 			get_node("/root/Game/Jingle").play()
-			comboPlay()
 		if(counth==8):
 			for j in range(8):
 				Globals.grid[j][i] = false
@@ -97,10 +97,15 @@ func checkForLines():
 			Globals.combo += 1
 			Globals.points += 100 * Globals.combo
 			Globals.spawnClearAnim(0, (i+1)*128, -PI/2)
+			get_node("/root/Game/Jingle").pitch_scale = (Globals.combo-1)*0.1+1
 			get_node("/root/Game/Jingle").play()
-			comboPlay()
 			
 	if !comboUp: Globals.combo = 0
+	
+	if Globals.combo > 1:
+		get_node("/root/Game/lbCombo").text = "[rainbow][wave amp=100 freq=10]COMBO X"+str(Globals.combo)
+		get_node("/root/Game/lbCombo").opacity = 1
+		comboPlay()
 
 
 func checkIfAlive():
